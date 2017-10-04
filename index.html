@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/styles/styles.css"></link>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <title>What's the Weather?</title>
+    </head>
+    <body>
+        <div id="bgImage">
+            <div class="center-block">
+                <div class="container-fluid graybg">
+                    <div class="container-fluid text-center">
+                        <h4>Search bar and city info</h4>
+                    </div>
+                </div>
+                <div class="container-fluid lightgrayopaquebg" style="height:100%">
+                    <div id='app' class="text-center textContainer">
+                        <h1>{{ location }}</h1>
+                        <h2>{{ temperature }}</h2>
+                        <h3>{{ conditions }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid darkbg" id="footer">
+                <h4>Another element - API Credits and link to homepage</h4>
+            </div>
+        </div>
+    <script>
+        function getImageURL() {
+            //var flickrImgArr;
+            return axios.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3cb74c124f0c53410b3824d18cc2a4b1&tags=clouds&per_page=5&format=json&nojsoncallback=1")
+            .then( response => {
+                //flickrImgArr = response.data.photos.photo;
+                this.response = response.data.photos.photo;
+                return this.response[0];
+                //return bgImageURL;
+            });
+        }
+        
+        getImageURL()
+        .then(data => {
+            var bgImageURL;
+            bgImageURL = 'https://farm' + data.farm + '.staticflickr.com/' + data.server + '/' + data.id + '_' + data.secret + '_b.jpg';
+            document.getElementById('bgImage').style.backgroundImage = "url(" + bgImageURL + ')';
+        });
+    </script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="/scripts/app.js"></script>
+    </body>
+</html>
+
