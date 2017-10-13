@@ -3,6 +3,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="/styles/styles.css"></link>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/scripts/locationSearch.js"></script>
         <title>What's the Weather?</title>
     </head>
     <body>
@@ -10,7 +11,12 @@
             <div class="center-block">
                 <div class="container-fluid darkbg">
                     <div class="container-fluid text-center">
-                        <h4>Search bar and city info</h4>
+                        <h3>What's the Weather for:</h3>
+                        <div class="form-group">
+                            <input id="txtSearch" type="text" list="locations" class="form-control" placeholder="Enter City, State or Zip" onkeyup="doSearch(this.value);">
+                            <datalist id="locations">
+                            </datalist>
+                        </div>
                     </div>
                 </div>
                 <div class="container-fluid lightgrayopaquebg" style="height:100%">
@@ -22,7 +28,7 @@
                 </div>
             </div>
             <div class="container-fluid darkbg" id="footer">
-                <h4>Another element - API Credits and link to homepage</h4>
+                <h4>API Credits and link to homepage</h4>
             </div>
         </div>
     <script src="https://unpkg.com/vue"></script>
