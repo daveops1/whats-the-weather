@@ -19,7 +19,8 @@ function doSearch(text) {
                 //Loop over array and populate datalist
                 jsonLocations.RESULTS.forEach(function(item) {
                     var option = document.createElement('option');
-                    option.value = item.name;
+                    option.label = item.name;
+                    option.value = item.l;
                     dataList.appendChild(option);
                 });
             }

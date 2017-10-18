@@ -6,10 +6,12 @@ var app = new Vue ({
         results: []
     },
     mounted() {
-        axios.get("https://api.wunderground.com/api/f7f738f8dde51103/conditions/q/CA/Los_Angeles.json")
+        axios.get("http://api.wunderground.com/api/f7f738f8dde51103/conditions" + document.getElementById('txtSearch').value + ".json")
         .then(response => {this.results = response.data.current_observation});
     },
     updated: function() {
+        axios.get("http://api.wunderground.com/api/f7f738f8dde51103/conditions" + document.getElementById('txtSearch').value + ".json")
+        .then(response => {this.results = response.data.current_observation});
         weatherText = this.results.weather;
         weatherText = parseWeatherText(weatherText);
         callGetImageURL();
@@ -18,7 +20,7 @@ var app = new Vue ({
 
 function getImageURL() {
     //var flickrImgArr;
-    return axios.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=18391479f53d149ee9f33d676616d003&tags=weather+" + weatherText + "&per_page=5&format=json&nojsoncallback=1")
+    return axios.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=18391479f53d149ee9f33d676616d003&tags=weather," + weatherText + "&per_page=5&format=json&nojsoncallback=1")
     .then( response => {
         //flickrImgArr = response.data.photos.photo;
         this.response = response.data.photos.photo;
@@ -38,7 +40,7 @@ getImageURL()
 
 function parseWeatherText(txt) {
     if (txt.lastIndexOf(" ") > -1) {
-        txt = txt.replace(" ", "+");
+        txt = txt.replace(" ", ",");
     }
     return txt;
 }
