@@ -16,16 +16,15 @@
                             <input id="txtSearch" type="text" list="locations" class="form-control" placeholder="Enter City, State or Zip" onkeyup="doSearch(this.value);">
                             <datalist id="locations">
                             </datalist>
-                            <br />
-                            <button class="btn btn-default btn-lg" onClick="app.$forceUpdate();">Get the weather! <span class="glyphicon glyphicon-cloud"></span></button>
                         </div>
                     </div>
                 </div>
                 <div class="container-fluid lightgrayopaquebg" style="height:100%">
                     <div id='app' class="text-center textContainer">
-                        <h1>{{ results.display_location.full }}</h1>
-                        <h2>{{ results.temperature_string }}</h2>
-                        <h3>{{ results.weather }}</h3>
+                        <button class="btn btn-default btn-lg" v-on:click="showWeather">Get the weather! <span class="glyphicon glyphicon-cloud"></span></button>
+                        <h1 v-if="results">{{ results.display_location.full }}</h1>
+                        <h2 v-if="results">{{ results.temperature_string }}</h2>
+                        <h3 v-if="results">{{ results.weather }}</h3>
                     </div>
                 </div>
             </div>
